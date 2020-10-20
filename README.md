@@ -5,9 +5,13 @@ This wrapper supports Bithumb Global API as described [here](https://github.com/
 ## Implementation
 | Endpoint               	| REST Support 	| WS Support 	        |
 |------------------------	|--------------	|-------------------	|
+| /spot/assetList        	| ✔            	| 👎                 	|
+| /spot/config           	| ✔            	| 👎                 	|
+| /spot/placeOrder       	| ✔            	| 👎                 	|
+| /spot/singleOrder      	| ✔            	| 👎                 	|
 | /wallet/depositHistory 	| ✔            	| 👎                 	|
-|                        	|              	|                   	|
-|                        	|              	|                   	|
+| /wallet/withdrawHistory 	| ✔            	| 👎                 	|
+| /withdraw              	| ✔            	| 👎                 	|
 
 ## Donation Info
 If you find this implementation useful, consider donating to the accounts below.

@@ -1,7 +1,6 @@
 package go_bithumb
 
 import (
-	"fmt"
 	"github.com/PrettyBoyHelios/go-bithumb/models"
 	"github.com/shopspring/decimal"
 	"net/http"
@@ -61,7 +60,7 @@ func (b *Bithumb) Withdraw(asset string, address string, quantity decimal.Decima
 	}{
 		asset, address, quantity.String(), mark,
 	}
-	err := b.client.post(b.client.url + "/spot/assetList", p, &r)
+	err := b.client.post(b.client.url + "/withdraw", p, &r)
 	if err != nil {
 		return false, err
 	}
@@ -89,7 +88,6 @@ func (b *Bithumb) CreateOrder(symbol string, side string, quantity decimal.Decim
 	if err != nil {
 		return &c, err
 	}
-	fmt.Println("message: ", c.Msg)
 	return &c, nil
 }
 
@@ -105,7 +103,6 @@ func (b *Bithumb) OrderDetail(symbol string, orderId string) (*models.OrderDetai
 	if err != nil {
 		return &c, err
 	}
-	fmt.Println("message: ", &c.Msg)
 	return &c, nil
 }
 
@@ -115,7 +112,6 @@ func (b *Bithumb) GetConfig() (*models.ConfigResp, error) {
 	if err != nil {
 		return &c, err
 	}
-	fmt.Println("message: ", &c.Data)
 	return &c, nil
 }
 
@@ -128,11 +124,25 @@ func (b *Bithumb) DepositHistory(asset string) (*models.DepositHistory, error) {
 	}{
 		asset, strconv.FormatInt(time.Now().UnixNano()/1e6 - fromDate, 10),
 	}
-	fmt.Println(time.Now().UnixNano()/1e6)
 	err := b.client.post(b.client.url + "/wallet/depositHistory", p, &c)
 	if err != nil {
 		return &c, err
 	}
-	fmt.Println("message: ", &c.Msg)
+	return &c, nil
+}
+
+func (b *Bithumb) WithdrawalHistory(asset string) (*models.WithdrawHistory, error) {
+	var c models.WithdrawHistory
+	fromDate := int64(1000 * 60 * 60 * 24 * 90) // 90 days in milliseconds
+	p := struct {
+		Symbol  string `json:"coin"`
+		Start string `json:"start"`
+	}{
+		asset, strconv.FormatInt(time.Now().UnixNano()/1e6 - fromDate, 10),
+	}
+	err := b.client.post(b.client.url + "/wallet/withdrawHistory", p, &c)
+	if err != nil {
+		return &c, err
+	}
 	return &c, nil
 }

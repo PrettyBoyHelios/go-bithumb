@@ -53,6 +53,22 @@ type DepositHistory struct {
 	} `json:"data"`
 }
 
+type WithdrawHistory struct {
+	baseResp
+	Data []struct {
+		CoinType     string          `json:"coinType"`
+		Address      string          `json:"address"`
+		Quantity     decimal.Decimal `json:"quantity"`
+		CreateTime   int64           `json:"createTime"`
+		Fee          decimal.Decimal `json:"fee"`
+		WithdrawType string          `json:"withdrawType"`
+		Memo         string          `json:"memo"`
+		ID           string          `json:"id"`
+		Status       string          `json:"status"`
+		Txid         string          `json:"txid"`
+	} `json:"data"`
+}
+
 type OrderDetailResp struct {
 	baseResp
 	Data struct {
