@@ -19,6 +19,7 @@ func NewBithhumb() *Bithumb {
 		apiKey:    os.Getenv("ApiKey"),
 		secretKey: os.Getenv("SecretKey"),
 		client:    http.Client{},
+		url: "https://global-openapi.bithumb.pro/openapi/v1",
 	}
 	return b
 }

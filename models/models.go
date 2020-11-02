@@ -14,6 +14,7 @@ type ConfigResp struct {
 			FullName       string          `json:"fullName"`
 			TakerFeeRate   decimal.Decimal `json:"takerFeeRate"`
 			WithdrawStatus decimal.Decimal `json:"withdrawStatus"`
+			MinTxAmount    decimal.Decimal `json:"minTxAmt"`
 		} `json:"coinConfig"`
 		ContractConfig []struct {
 			Symbol       string          `json:"symbol"`

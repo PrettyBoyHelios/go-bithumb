@@ -5,6 +5,7 @@ import (
 	"github.com/joho/godotenv"
 	"github.com/stretchr/testify/assert"
 	"os"
+	"strings"
 	"testing"
 )
 
@@ -18,10 +19,16 @@ func TestPublicConfig(t *testing.T)  {
 	assert.Nil(t, err)
 
 	for _, coin := range configRes.Data.CoinConfig {
-		if coin.Name == "GTH" {
-			fmt.Println(coin)
+		if coin.Name == "GTH" || coin.Name == "LTC"{
+			fmt.Printf("%+v\n", coin)
 		}
 	}
+	for _, market := range configRes.Data.SpotConfig {
+		if strings.Contains(market.Symbol, "GTH") {
+			fmt.Printf("%+v\n", market)
+		}
+	}
+
 }
 
 /* func TestPublicOrderBook(t *testing.T)  {
